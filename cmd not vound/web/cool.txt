@@ -1,0 +1,216 @@
+
+        
+        
+          
+          <!-- Social -->
+          
+            
+          
+        
+          
+          <!-- Title and nav wrapper -->
+          <div class="header-title-nav-wrapper">
+            
+
+            
+
+            
+              
+              <!-- Title -->
+              
+                <div
+                  class="
+                    header-title
+                    
+                  "
+                  data-animation-role="header-element"
+                >
+                  
+                    <div class="header-title-logo">
+                      <a href="/" data-animation-role="header-element">
+                      
+<img src="//images.squarespace-cdn.com/content/v1/5fceeec11c15f507d7682ec6/1620922292257-FW5RL4KFW17PA27SHWAP/Untitled-11.png?format=1500w" alt="Jua" style="display:block" fetchpriority="high" loading="eager" decoding="async" data-loader="raw">
+
+                      </a>
+                    </div>
+
+                  
+                  
+                </div>
+              
+            
+              
+              <!-- Nav -->
+              <div class="header-nav">
+                <div class="header-nav-wrapper">
+                  <nav class="header-nav-list">
+                    
+
+
+  
+    <div class="header-nav-item header-nav-item--collection header-nav-item--homepage">
+      <a
+        href="/"
+        data-animation-role="header-element"
+        
+      >
+        HOME
+      </a>
+    </div>
+  
+  
+  
+
+
+  
+    <div class="header-nav-item header-nav-item--collection">
+      <a
+        href="/about"
+        data-animation-role="header-element"
+        
+      >
+        INFORMATION
+      </a>
+    </div>
+  
+  
+  
+
+
+  
+    <div class="header-nav-item header-nav-item--collection header-nav-item--active">
+      <a
+        href="/press"
+        data-animation-role="header-element"
+        
+          aria-current="page"
+        
+      >
+        PRESS
+      </a>
+    </div>
+  
+  
+  
+
+
+  
+    <div class="header-nav-item header-nav-item--collection">
+      <a
+        href="/our-team"
+        data-animation-role="header-element"
+        
+      >
+        MENU
+      </a>
+    </div>
+  
+  
+  
+
+
+  
+    <div class="header-nav-item header-nav-item--collection">
+      <a
+        href="/reservation"
+        data-animation-role="header-element"
+        
+      >
+        RESERVATION
+      </a>
+    </div>
+  
+  
+  
+
+
+  
+    <div class="header-nav-item header-nav-item--collection">
+      <a
+        href="/gift"
+        data-animation-role="header-element"
+        
+      >
+        GIFT
+      </a>
+    </div>
+  
+  
+  
+
+
+  
+    <div class="header-nav-item header-nav-item--collection">
+      <a
+        href="/event"
+        data-animation-role="header-element"
+        
+      >
+        EVENT
+      </a>
+    </div>
+  
+  
+  
+
+
+  
+    <div class="header-nav-item header-nav-item--collection">
+      <a
+        href="/pagegt"
+        data-animation-role="header-element"
+        
+      >
+        GALLERY
+      </a>
+    </div>
+  
+  
+  
+
+
+
+                  </nav>
+                </div>
+              </div>
+            
+            
+          </div>
+        
+          
+          <!-- Actions -->
+          <div class="header-actions header-actions--right">
+            
+            
+              
+                <div class="header-actions-action header-actions-action--social">
+                  
+                    
+                      <a class="icon icon--fill  header-icon header-icon-border-shape-none header-icon-border-style-outline"  href="https://instagram.com/jua.nyc?igshid=1ls12xcx6fu9l" target="_blank" aria-label="instagram-unauth">
+                        <svg viewBox="23 23 64 64">
+                          <use xlink:href="#instagram-unauth-icon" width="110" height="110"></use>
+                        </svg>
+                      </a>
+                    
+                  
+                </div>
+              
+            
+
+            
+
+          
+          
+
+            
+            <div class="showOnMobile">
+              
+            </div>
+
+            
+            <div class="showOnDesktop">
+              
+            </div>
+
+            
+          </div>
