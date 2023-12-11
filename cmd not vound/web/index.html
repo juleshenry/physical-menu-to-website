@@ -1,61 +1,216 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Website</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
-    <style>
-        @media (max-width: 640px) {
-            .navbar-menu {
-                display: none;
-            }
-            .navbar-menu.active {
-                display: block;
-            }
-        }
-    </style>
-</head>
-<body>
 
-<div class="bg-gray-800 text-white p-4">
-    <div class="container mx-auto">
-        <nav class="flex items-center justify-between">
-            <div class="text-2xl font-bold">Your Website</div>
+        
+        
+          
+          <!-- Social -->
+          
+            
+          
+        
+          
+          <!-- Title and nav wrapper -->
+          <div class="header-title-nav-wrapper">
+            
 
-            <!-- Hamburger Menu -->
-            <div class="block lg:hidden">
-                <button id="navbar-toggle" class="text-white hover:text-gray-300 focus:outline-none">
-                    <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                         xmlns="http://www.w3.org/2000/svg">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                              d="M4 6h16M4 12h16m-7 6h7"></path>
-                    </svg>
-                </button>
+            
+
+            
+              
+              <!-- Title -->
+              
+                <div
+                  class="
+                    header-title
+                    
+                  "
+                  data-animation-role="header-element"
+                >
+                  
+                    <div class="header-title-logo">
+                      <a href="/" data-animation-role="header-element">
+                      
+<img src="//images.squarespace-cdn.com/content/v1/5fceeec11c15f507d7682ec6/1620922292257-FW5RL4KFW17PA27SHWAP/Untitled-11.png?format=1500w" alt="Jua" style="display:block" fetchpriority="high" loading="eager" decoding="async" data-loader="raw">
+
+                      </a>
+                    </div>
+
+                  
+                  
+                </div>
+              
+            
+              
+              <!-- Nav -->
+              <div class="header-nav">
+                <div class="header-nav-wrapper">
+                  <nav class="header-nav-list">
+                    
+
+
+  
+    <div class="header-nav-item header-nav-item--collection header-nav-item--homepage">
+      <a
+        href="/"
+        data-animation-role="header-element"
+        
+      >
+        HOME
+      </a>
+    </div>
+  
+  
+  
+
+
+  
+    <div class="header-nav-item header-nav-item--collection">
+      <a
+        href="/about"
+        data-animation-role="header-element"
+        
+      >
+        INFORMATION
+      </a>
+    </div>
+  
+  
+  
+
+
+  
+    <div class="header-nav-item header-nav-item--collection header-nav-item--active">
+      <a
+        href="/press"
+        data-animation-role="header-element"
+        
+          aria-current="page"
+        
+      >
+        PRESS
+      </a>
+    </div>
+  
+  
+  
+
+
+  
+    <div class="header-nav-item header-nav-item--collection">
+      <a
+        href="/our-team"
+        data-animation-role="header-element"
+        
+      >
+        MENU
+      </a>
+    </div>
+  
+  
+  
+
+
+  
+    <div class="header-nav-item header-nav-item--collection">
+      <a
+        href="/reservation"
+        data-animation-role="header-element"
+        
+      >
+        RESERVATION
+      </a>
+    </div>
+  
+  
+  
+
+
+  
+    <div class="header-nav-item header-nav-item--collection">
+      <a
+        href="/gift"
+        data-animation-role="header-element"
+        
+      >
+        GIFT
+      </a>
+    </div>
+  
+  
+  
+
+
+  
+    <div class="header-nav-item header-nav-item--collection">
+      <a
+        href="/event"
+        data-animation-role="header-element"
+        
+      >
+        EVENT
+      </a>
+    </div>
+  
+  
+  
+
+
+  
+    <div class="header-nav-item header-nav-item--collection">
+      <a
+        href="/pagegt"
+        data-animation-role="header-element"
+        
+      >
+        GALLERY
+      </a>
+    </div>
+  
+  
+  
+
+
+
+                  </nav>
+                </div>
+              </div>
+            
+            
+          </div>
+        
+          
+          <!-- Actions -->
+          <div class="header-actions header-actions--right">
+            
+            
+              
+                <div class="header-actions-action header-actions-action--social">
+                  
+                    
+                      <a class="icon icon--fill  header-icon header-icon-border-shape-none header-icon-border-style-outline"  href="https://instagram.com/jua.nyc?igshid=1ls12xcx6fu9l" target="_blank" aria-label="instagram-unauth">
+                        <svg viewBox="23 23 64 64">
+                          <use xlink:href="#instagram-unauth-icon" width="110" height="110"></use>
+                        </svg>
+                      </a>
+                    
+                  
+                </div>
+              
+            
+
+            
+
+          
+          
+
+            
+            <div class="showOnMobile">
+              
             </div>
 
-            <!-- Navbar Links -->
-            <ul class="hidden lg:flex space-x-4 navbar-menu">
-                <li><a href="#" class="hover:text-gray-300">Home</a></li>
-                <li><a href="#" class="hover:text-gray-300">About</a></li>
-                <li><a href="#" class="hover:text-gray-300">Contact</a></li>
-            </ul>
-        </nav>
-    </div>
-</div>
+            
+            <div class="showOnDesktop">
+              
+            </div>
 
-<div class="container mx-auto mt-8">
-    <h1 class="text-3xl font-bold mb-4">Home</h1>
-    <p>Your home page content goes here...</p>
-</div>
-
-<!-- Include the following script to toggle the mobile menu -->
-<script>
-    document.getElementById('navbar-toggle').addEventListener('click', function () {
-        document.querySelector('.navbar-menu').classList.toggle('active');
-    });
-</script>
-
-</body>
-</html>
-
+            
+          </div>
