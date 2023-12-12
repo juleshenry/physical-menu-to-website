@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Website</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <link rel="stylesheet" href="index.css">
     <style>
         @media (max-width: 640px) {
             .navbar-menu {
@@ -33,12 +34,12 @@
                     </svg>
                 </button>
             </div>
-
             <!-- Navbar Links -->
             <ul class="hidden lg:flex space-x-4 navbar-menu">
-                <li><a href="#" class="hover:text-gray-300" style="transition-timing-function: ease; transition-duration: 1.5s; transition-delay: 0.0545455s;">Home</a></li>
-                <li><a href="#" class="hover:text-gray-300" style="transition-timing-function: ease; transition-duration: 1.5s; transition-delay: 0.0545455s;">About</a></li>
-                <li><a href="#" class="hover:text-gray-300" style="transition-timing-function: ease; transition-duration: 1.5s; transition-delay: 0.0545455s;">Contact</a></li>
+                <li><a href="" data-animation-role="header-element" aria-current="page" class="preFade fadeIn" style="transition-timing-function: ease; transition-duration: 1.5s; transition-delay: 0.0545455s;">HOME</a></li>
+                <li><a href="#" class="preFade fadeIn hover:red" style="transition-timing-function: ease; transition-duration: 1.5s; transition-delay: 0.0545455s;">LHome</a></li>
+                <li><a href="#" class="preFade fadeIn hover:text-gray-300"  style="transition-timing-function: ease; transition-duration: 1.5s; transition-delay: 0.0545455s;">About</a></li>
+                <li><a href="#" class="preFade fadeIn hover:text-gray-300" style="transition-timing-function: ease; transition-duration: 1.5s; transition-delay: 0.0545455s;">Contact</a></li>
             </ul>
         </nav>
     </div>

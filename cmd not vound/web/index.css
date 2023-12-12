@@ -1,0 +1,8 @@
+.preFade {
+    opacity: 0;
+    transition-property: opacity
+}
+
+.fadeIn:not([data-override-initial-global-animation]) {
+    opacity: 1 !important
+}
