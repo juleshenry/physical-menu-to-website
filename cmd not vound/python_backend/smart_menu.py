@@ -96,14 +96,13 @@ class SmartMenu:
     def get_html_body(s):
         for im in s.image_paths:
             s.identify(im)
-            break
         return s.body
 
     def pprint(s):
         print(*[f"{k}:{v}" for k, v in s.body.items()])
 
     def associate_prices_to_text(s):
-        if not getattr(s,"body"):
+        if not getattr(s, "body"):
             s.get_html_body()
         file_price_text = {}
         for arquivo, text in s.body.items():
@@ -131,29 +130,40 @@ class SmartMenu:
                     for ch_l in ch.split("\n")
                 ]
             )
+
             def get_value(_ch):
-                '''
-                todo error if multiple vals, or prompt all possible'''
+                """
+                todo error if multiple vals, or prompt all possible"""
                 val = 0
                 for _ch_l in _ch.split("\n"):
-                    if x:=list(filter(lambda x: x.isnumeric() or x in ".,", _ch_l)):
-                        return float(''.join(x))
+                    if x := list(
+                        filter(
+                            lambda y: any(yy.isalpha() for yy in y),
+                            filter(lambda x: x.isnumeric() or x in ".,", _ch_l),
+                        )
+                    ):
+                        return float("".join(x))
                 raise ValueError("invalid chunk")
-                
+
             price_text = {}
             for c in filter(valid_chunk, chunkz):
                 val = get_value(c)
-                item = ''.join([cc for cc in c if cc not in map(str,range(10))]).replace('$',"").replace('.',"")
-                price_text.update({val:item})
+                item = (
+                    "".join([cc for cc in c if cc not in map(str, range(10))])
+                    .replace("$", "")
+                    .replace(".", "")
+                )
+                price_text.update({val: item})
 
             file_price_text[arquivo] = price_text
 
-        return s.ss(file_price_text,"fpt")
+        return s.ex("fpt", file_price_text,)
 
-    def ss(s,x,e):
-        setattr(s,e,x)
+    def ex(s, e, x):
+        setattr(s, e, x)
         return x
-    
+
+
 def premain(roo: str):
     # Provide the path to the menu image
     x = os.listdir(roo)
@@ -165,14 +175,14 @@ def main(*a, **k):
     ips = premain("examples/sabor-catracha")
     sm = SmartMenu(ips)
     fpt = sm.associate_prices_to_text()
-    
-    # for _fpt in sm.fpt.items():
-    #     f,pt = _fpt
-    #     print(f)
-    #     for _pt in pt.items():
-    #         p,t=_pt
-    #         print(p)
-    #         print(t)
+
+    for _fpt in sm.fpt.items():
+        f, pt = _fpt
+        print(f)
+        for _pt in pt.items():
+            p, t = _pt
+            print(p)
+            print(t)
 
 
 if __name__ == "__main__":
