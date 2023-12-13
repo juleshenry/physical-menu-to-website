@@ -19,7 +19,7 @@ def kash(file_path):
                     cow = json.load(file)
             except (json.JSONDecodeError, FileNotFoundError):
                 cow = {}
-            milk = cow.get(cere:= cereal(*a, **k))
+            milk = cow.get(cere := cereal(*a, **k))
             if milk is None:
                 result = func(*a, **k)
                 cow[cere] = result
@@ -78,20 +78,23 @@ print(f'>>{(etap:="step two")}<<', fib(1, 2, 3, "arg", key="key", kwarg=etap))
 print(f'>>{(etap:="step two")}<<', fib(1, 2, 3, "arg", key="key", kwarg=etap))
 print(f'>>{(etap:="step one")}<<', fib(1, 2, 3, "arg", key="key", kwarg=etap))
 """
-if __name__=='__main__':
+if __name__ == "__main__":
+
     @kash("good")
     def fib(*a, **k):
         for _ in range(1000):
             pass
         print("~~~!!!!!@@@@@((((*****))))````````" * 2)
         return f"F({cereal(*a,**k)})"
+
     print(f'>>{(etap:="step one")}<<', fib(1, 2, 3, "arg", key="key", kwarg=etap))
     print(f'>>{(etap:="step one")}<<', fib(1, 2, 3, "arg", key="key", kwarg=etap))
     print(f'>>{(etap:="step two")}<<', fib(1, 2, 3, "arg", key="key", kwarg=etap))
     print(f'>>{(etap:="step two")}<<', fib(1, 2, 3, "arg", key="key", kwarg=etap))
     print(f'>>{(etap:="step one")}<<', fib(1, 2, 3, "arg", key="key", kwarg=etap))
-    print('expected')
-    print("""
+    print("expected")
+    print(
+        """
 ~~~!!!!!@@@@@((((*****))))````````~~~!!!!!@@@@@((((*****))))````````
 >>step one<< F({'a': '[1, 2, 3, "arg"]', 'k': '{"key": "key", "kwarg": "step one"}'})
 >>step one<< F({'a': '[1, 2, 3, "arg"]', 'k': '{"key": "key", "kwarg": "step one"}'})
@@ -99,4 +102,5 @@ if __name__=='__main__':
 >>step two<< F({'a': '[1, 2, 3, "arg"]', 'k': '{"key": "key", "kwarg": "step two"}'})
 >>step two<< F({'a': '[1, 2, 3, "arg"]', 'k': '{"key": "key", "kwarg": "step two"}'})
 >>step one<< F({'a': '[1, 2, 3, "arg"]', 'k': '{"key": "key", "kwarg": "step one"}'})
-""")
+"""
+    )
