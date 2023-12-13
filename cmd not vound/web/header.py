@@ -1,10 +1,9 @@
-
 tab_text = "Ejemplo Restuarante"
 url = "https://www.wikipedia.org"
 asset = "assets/img.png"
 desc = "Esto es una descripcion"
 
-__HEAD__ = """
+__HEAD__ = f"""
 <head>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -25,11 +24,11 @@ __HEAD__ = """
     <meta itemprop="name" content="{tab_text}"/>
     <meta itemprop="url" content="{url}"/>
     <meta itemprop="description" content="{desc}"/>
-    <meta itemprop="thumbnailUrl" content="{asset}/>
-    <link rel="image_src" href="{asset} />
-    <meta itemprop="image" content="{asset}/>
+    <meta itemprop="thumbnailUrl" content="{asset}"/>
+    <link rel="image_src" href="{asset}"/>
+    <meta itemprop="image" content="{asset}"/>
     <meta name="twitter:title" content="{tab_text}"/>
-    <meta name="twitter:image" content="{asset}/>
+    <meta name="twitter:image" content="{asset}"/>
     <meta name="twitter:url" content="{url}"/>
     <meta name="twitter:card" content="summary"/>
     <meta name="twitter:description" content="{desc}"/>
@@ -38,7 +37,7 @@ __HEAD__ = """
 </head>
 """
 
-if __name__=='__main__':
-    fp = 'coo.html'
-    with open(fp,'w+')as fp:
+if __name__ == "__main__":
+    fp = "coo.html"
+    with open(fp, "w+") as fp:
         fp.write(__HEAD__)
