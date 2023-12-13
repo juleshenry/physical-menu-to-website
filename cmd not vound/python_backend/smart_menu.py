@@ -138,12 +138,13 @@ class SmartMenu:
                 for _ch_l in _ch.split("\n"):
                     if x := list(
                         filter(
-                            lambda y: any(yy.isalpha() for yy in y),
+                            lambda y: any(yy.isnumeric() for yy in y),
                             filter(lambda x: x.isnumeric() or x in ".,", _ch_l),
                         )
                     ):
                         return float("".join(x))
-                raise ValueError("invalid chunk")
+                # print( ValueError("invalid chunk" + str(_ch)))
+                return val
 
             price_text = {}
             for c in filter(valid_chunk, chunkz):
@@ -178,11 +179,11 @@ def main(*a, **k):
 
     for _fpt in sm.fpt.items():
         f, pt = _fpt
-        print(f)
+        print('FILE',f)
         for _pt in pt.items():
             p, t = _pt
-            print(p)
-            print(t)
+            print('price',p)
+            print('item; "',' '.join(t.split('\n')),'"')
 
 
 if __name__ == "__main__":
