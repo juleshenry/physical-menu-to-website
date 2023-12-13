@@ -171,19 +171,19 @@ def premain(roo: str):
     ips = ["/".join((os.getcwd(), roo, y,)) for y in x]
     return ips
 
-
-def main(*a, **k):
-    ips = premain("examples/sabor-catracha")
-    sm = SmartMenu(ips)
-    fpt = sm.associate_prices_to_text()
-
+def print_smart_menu(sm):
     for _fpt in sm.fpt.items():
         f, pt = _fpt
         print('FILE',f)
         for _pt in pt.items():
             p, t = _pt
-            print('price',p)
-            print('item; "',' '.join(t.split('\n')),'"')
+            print()
+            print('item; "',' '.join(t.split('\n')),'"     price',p)
+def main(*a, **k):
+    ips = premain("examples/sabor-catracha")
+    sm = SmartMenu(ips)
+    fpt = sm.associate_prices_to_text()
+    print_smart_menu(sm)
 
 
 if __name__ == "__main__":
