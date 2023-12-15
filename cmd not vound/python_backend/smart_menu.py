@@ -105,10 +105,14 @@ class SmartMenu:
         if not getattr(s, "body"):
             s.get_html_body()
         file_price_text = {}
+        for a,b in s.body.items():
+            print(a)
+            print(b)
+        1/0
         for arquivo, text in s.body.items():
             in_chunk = False
             chunk = ""
-
+            print('###',arquivo)
             # print("RAW" * 99)
             # for te in text.split("\n"):
             #     print(te)
