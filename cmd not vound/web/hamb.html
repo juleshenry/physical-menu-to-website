@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <title>Hamburger Menu</title>
+</head>
+<body class="bg-gray-100">
+
+  <div class="flex items-center justify-between p-4 bg-gray-700 text-white">
+    <div>
+      <span class="text-xl font-semibold">Your Logo</span>
+    </div>
+
+    <!-- Hamburger Icon -->
+    <div class="lg:hidden">
+      <button id="hamb" class="text-white focus:outline-none z-50 fixed">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+   <!-- Navigation Menu (initially hidden) -->
+   <div id="menu2" class="hidden fixed top-0 left-0 w-full h-full bg-gray-700 bg-opacity-75 flex items-center justify-center z-40">
+    <div class="bg-white p-8 rounded-md">
+      <a href="#" class="block mb-4">Home</a>
+      <a href="#" class="block mb-4">About</a>
+      <a href="#" class="block mb-4">Services</a>
+      <a href="#" class="block">Contact</a>
+    </div>
+  </div>
+
+  <script>
+    // JavaScript to toggle the menu visibility
+    const toggleButton = document.getElementById('hamb');
+    const menu2 = document.getElementById('menu2');
+
+    toggleButton.addEventListener('click', () => {
+      menu2.classList.toggle('hidden');
+      toggleButton.classList.toggle('w-6');
+      toggleButton.classList.toggle('h-6');
+    });
+  </script>
+
+</body>
+</html>

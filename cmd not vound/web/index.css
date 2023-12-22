@@ -6,3 +6,12 @@
 .fadeIn:not([data-override-initial-global-animation]) {
     opacity: 1 !important
 }
+
+@media (max-width: 640px) {
+    .navbar-menu {
+        display: none;
+    }
+    .navbar-menu.active {
+        display: block;
+    }
+}
