@@ -45,7 +45,7 @@
             <div class="text-2xl font-bold">Restuarante</div>
             <!-- Hamburger Menu -->
             <div class="block lg:hidden">
-                <button id="navbar-toggle" class="text-white hover:text-gray-300 focus:outline-none">
+                <button id="hamb" class="text-white hover:text-gray-300 focus:outline-none">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
                          xmlns="http://www.w3.org/2000/svg">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -54,32 +54,44 @@
                 </button>
             </div>
             <!-- Navbar Links -->
-            <ul class="hidden lg:flex space-x-6 navbar-menu">
+            <ul class="hamb hidden lg:flex space-x-6 navbar-menu">
                 <li><a href="" data-animation-role="header-element" aria-current="page" class="preFade fadeIn" style="transition-timing-function: ease; transition-duration: 1.5s; transition-delay: 0.0545455s;">HOME</a></li>
                 <li><a href="#" class="preFade fadeIn hover:red" style="transition-timing-function: ease; transition-duration: 1.5s; transition-delay: 0.545455s;">LHome</a></li>
                 <li><a href="#" class="preFade fadeIn hover:text-gray-300"  style="transition-timing-function: ease; transition-duration: 1.5s; transition-delay: 0.545455s;">About</a></li>
                 <li><a href="#" class="preFade fadeIn hover:text-gray-300" style="transition-timing-function: ease; transition-duration: 1.5s; transition-delay: 0.545455s;">Contact</a></li>
             </ul>
+
+           
         </nav>
     </div>
+
+     
 </div>
 
-<div class="container mx-auto mt-8">
+<!-- <div class="container mx-auto mt-8">
     <h1 class="text-3xl font-bold mb-4">Home</h1>
     <p>Your home page content goes here...</p>
-</div>
+</div> -->
+
+ <!-- Navigation Menu (initially invisible) -->
+ <div id="menu" class="invisible fixed top-0 left-0 w-full h-full bg-gray-700 bg-opacity-75 flex items-center justify-center">
+    <div class="bg-white p-8 rounded-md">
+      <a href="#" class="block mb-4">AAA</a>
+      <a href="#" class="block mb-4">BBB</a>
+      <a href="#" class="block mb-4">CCC</a>
+      <a id = hamb href="#" class="block">Contact</a>
+    </div>
+  </div>
 
 <!-- Include the following script to toggle the mobile menu -->
 <script>
-    // document.getElementById('navbar-toggle').addEventListener('click', function () {
-    //     document.querySelector('.navbar-menu').classList.toggle('active');
-    // });
-    // JavaScript to toggle the menu visibility
-    const toggleButton = document.getElementById('toggleButton');
+    const toggleButton = document.getElementById('hamb');
     const menu = document.getElementById('menu');
-
     toggleButton.addEventListener('click', () => {
-      menu.classList.toggle('hidden');
+      console.log('asdf');
+      menu.classList.toggle('invisible');
+    //   toggleButton.classList.toggle('w-6');
+    //   toggleButton.classList.toggle('h-6');
     });
 </script>
 
