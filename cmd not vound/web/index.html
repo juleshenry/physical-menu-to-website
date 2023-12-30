@@ -7,30 +7,30 @@
     <!-- This is Edge's Fund. -->
     <base href="">
     <meta charset="utf-8" />
-    <title>Ejemplo Restuarante</title>
+    <title>#tab_text#</title>
     <meta http-equiv="Accept-CH" content="Sec-CH-UA-Platform-Version, Sec-CH-UA-Model" />
     <link rel="icon" type="image/x-icon" href="assets/default-favicon.ico"/>
-    <link rel="canonical" href="https://www.wikipedia.org"/>
-    <meta property="og:site_name" content="Ejemplo Restuarante"/>
-    <meta property="og:title" content="Ejemplo Restuarante"/>
-    <meta property="og:url" content="https://www.wikipedia.org"/>
+    <link rel="canonical" href="#homepage_link#"/>
+    <meta property="og:site_name" content="#tab_text#"/>
+    <meta property="og:title" content="#tab_text#"/>
+    <meta property="og:url" content="#homepage_link#"/>
     <meta property="og:type" content="website"/>
-    <meta property="og:description" content="Esto es una descripcion"/>
+    <meta property="og:description" content="#description#"/>
     <meta property="og:image" content="assets/img.png"/>
     <meta property="og:image:width" content="90"/>
     <meta property="og:image:height" content="50"/>
-    <meta itemprop="name" content="Ejemplo Restuarante"/>
-    <meta itemprop="url" content="https://www.wikipedia.org"/>
-    <meta itemprop="description" content="Esto es una descripcion"/>
+    <meta itemprop="name" content="#tab_text#"/>
+    <meta itemprop="url" content="#homepage_link#"/>
+    <meta itemprop="description" content="#description#"/>
     <meta itemprop="thumbnailUrl" content="assets/img.png/">
     <link rel="image_src" href="assets/img.png"/>
     <meta itemprop="image" content="assets/img.png"/>
-    <meta name="twitter:title" content="Ejemplo Restuarante"/>
+    <meta name="twitter:title" content="#tab_text#"/>
     <meta name="twitter:image" content="assets/img.png"/>
-    <meta name="twitter:url" content="https://www.wikipedia.org"/>
+    <meta name="twitter:url" content="#homepage_link#"/>
     <meta name="twitter:card" content="summary"/>
-    <meta name="twitter:description" content="Esto es una descripcion"/>
-    <meta name="description" content="Esto es una descripcion" />
+    <meta name="twitter:description" content="#description#"/>
+    <meta name="description" content="#description#" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Website</title>
@@ -38,12 +38,10 @@
     <link rel="stylesheet" href="index.css">
 </head>
 
-
 <div class="bg-gray-800 text-white p-4">
     <div class="container mx-auto">
         <nav class="flex items-center justify-between">
-            <div class="text-2xl font-bold">Restuarante</div>
-            <!-- Hamburger Menu -->
+            <div class="text-2xl font-bold">#restuarant_name#</div>
             <div class="block lg:hidden">
                 <button id="hamb" class="text-white hover:text-gray-300 focus:outline-none">
                     <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
@@ -53,45 +51,31 @@
                     </svg>
                 </button>
             </div>
-            <!-- Navbar Links -->
             <ul class="hamb hidden lg:flex space-x-6 navbar-menu">
                 <li><a href="" data-animation-role="header-element" aria-current="page" class="preFade fadeIn" style="transition-timing-function: ease; transition-duration: 1.5s; transition-delay: 0.0545455s;">HOME</a></li>
                 <li><a href="#" class="preFade fadeIn hover:red" style="transition-timing-function: ease; transition-duration: 1.5s; transition-delay: 0.545455s;">LHome</a></li>
                 <li><a href="#" class="preFade fadeIn hover:text-gray-300"  style="transition-timing-function: ease; transition-duration: 1.5s; transition-delay: 0.545455s;">About</a></li>
                 <li><a href="#" class="preFade fadeIn hover:text-gray-300" style="transition-timing-function: ease; transition-duration: 1.5s; transition-delay: 0.545455s;">Contact</a></li>
             </ul>
-
-           
         </nav>
-    </div>
-
-     
+    </div>    
 </div>
 
-<!-- <div class="container mx-auto mt-8">
-    <h1 class="text-3xl font-bold mb-4">Home</h1>
-    <p>Your home page content goes here...</p>
-</div> -->
 
- <!-- Navigation Menu (initially invisible) -->
- <div id="menu" class="invisible fixed top-0 left-0 w-full h-full bg-gray-700 bg-opacity-75 flex items-center justify-center">
+<div id="menu" class="invisible fixed top-0 left-0 w-full h-full bg-gray-700 bg-opacity-75 flex items-center justify-center">
     <div class="bg-white p-8 rounded-md">
-      <a href="#" class="block mb-4">AAA</a>
-      <a href="#" class="block mb-4">BBB</a>
-      <a href="#" class="block mb-4">CCC</a>
-      <a id = hamb href="#" class="block">Contact</a>
+      <a href="#href_link#" class="block mb-4">#href_item#</a>
+      <a href="#href_link#" class="block mb-4">#href_item#</a>
+      <a href="#href_link#" class="block mb-4">#href_item#</a>
+      <a href="#href_link#" class="block">#href_item#</a>
     </div>
   </div>
 
-<!-- Include the following script to toggle the mobile menu -->
 <script>
     const toggleButton = document.getElementById('hamb');
     const menu = document.getElementById('menu');
     toggleButton.addEventListener('click', () => {
-      console.log('asdf');
       menu.classList.toggle('invisible');
-    //   toggleButton.classList.toggle('w-6');
-    //   toggleButton.classList.toggle('h-6');
     });
 </script>
 
