@@ -3,7 +3,7 @@ import os
 import rgb_fox as rgbf
 import pandas as pd
 from PIL import Image
-from kash import kash
+import pytesseract as pt
 import json
 
 """
@@ -44,12 +44,9 @@ import json
 `:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,
 `:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,'
 """
+from kash import kash
 from pri import nt
-
-print = nt
-
-import pytesseract as pt
-
+# print = nt
 
 @kash("identify_pure")
 def identify_pure(i):
@@ -61,7 +58,6 @@ class SmartMenu:
         s.color_counter = Counter()
         s.image_paths = image_paths
         s.body = dict()
-        # print(f'PYTESSSERACT: VERS..{pt.get_tesseract_version()}')
 
     def toJSON(self):
         return json.dumps(self, default=lambda o: o.__dict__, sort_keys=True, indent=4)
@@ -76,21 +72,7 @@ class SmartMenu:
         return cls(**data)
 
     def identify(s, im):
-        print("analyzing language data")
         content = identify_pure(im)
-        # print('analyzing image boxes')
-        # oh = pt.image_to_boxes(Image.open(im).rotate(180, expand=True), lang="spa")
-        # for o in oh.split('\n'):
-        #     print(o)
-        # print('analyzing image data')
-        # oh = pt.image_to_data(Image.open(im).rotate(180, expand=True), lang="spa")
-        # for o in oh[1:]:
-        #     print(o)
-        # pdoh = pd.DataFrame(oh[1:], columns=oh[0].split("\t"))
-        # print(pdoh)
-        # print(dir(o))
-        # print(type(o))
-        print("storing up")
         s.body.update({im.split("/")[-1]: content})
 
     def get_html_body(s):
@@ -105,18 +87,11 @@ class SmartMenu:
         if not getattr(s, "body"):
             s.get_html_body()
         file_price_text = {}
-        # for a,b in s.body.items():
-        #     print(a)
-        #     print(b)
         for arquivo, text in s.body.items():
             in_chunk = False
             chunk = ""
-            print('###',arquivo)
-            print("RAW" * 99)
             for te in text.split("\n"):
                 print(te)
-            print("RAW" * 99)
-
             chunkz = []
             for te in text.split("\n"):
                 if te == "" and not in_chunk:
@@ -146,7 +121,6 @@ class SmartMenu:
                         )
                     ):
                         return float("".join(x))
-                # print( ValueError("invalid chunk" + str(_ch)))
                 return val
 
             price_text = {}
@@ -188,9 +162,9 @@ def print_smart_menu(sm):
 def main(*a, **k):
     ips = premain("examples/sabor-catracha")
     sm = SmartMenu(ips)
+    sm.get_html_body()
+    # for a in sm.body.items():print(a[1])
     fpt = sm.associate_prices_to_text()
-    # print_smart_menu(sm)
-
 
 if __name__ == "__main__":
     main()
