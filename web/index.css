@@ -1,10 +1,10 @@
 /* Auto-generated CSS from menu image colors */
 
 :root {
-    --primary-color: #9ea0a3;
-    --secondary-color: #1a181d;
-    --accent-color: #694940;
-    --background-color: #d9d7d2;
+    --primary-color: #9fa1a3;
+    --secondary-color: #1c181e;
+    --accent-color: #6a4c42;
+    --background-color: #d7d6d2;
     --primary-text: #ffffff;
     --secondary-text: #ffffff;
 }
@@ -57,8 +57,10 @@ button:hover {
 @media (max-width: 640px) {
     .navbar-menu {
         display: none;
+        background-color: var(--primary-color);
     }
     .navbar-menu.active {
         display: block;
+        background-color: var(--primary-color);
     }
 }

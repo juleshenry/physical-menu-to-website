@@ -25,7 +25,7 @@ class SmartColor:
 
     def global_colors(s):
         # Aggregate counters...
-        if not getattr(s, "g_c", (run := False)):
+        if not hasattr(s, "g_c"):
             for image_path in s.image_paths:
                 color_count = s.identify(image_path)
                 print("counter for ", image_path, color_count)

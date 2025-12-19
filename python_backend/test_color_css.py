@@ -3,7 +3,7 @@
 Test script for CSS color generation from menu images.
 """
 import os
-from smart_color import SmartColor
+from smart_color_fast import SmartColor
 from css_generator import generate_css_from_images
 
 def main():

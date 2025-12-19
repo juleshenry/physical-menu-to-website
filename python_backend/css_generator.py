@@ -124,9 +124,11 @@ button:hover {{
 @media (max-width: 640px) {{
     .navbar-menu {{
         display: none;
+        background-color: var(--primary-color);
     }}
     .navbar-menu.active {{
         display: block;
+        background-color: var(--primary-color);
     }}
 }}
 """

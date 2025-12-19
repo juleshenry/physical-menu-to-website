@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extracted Menu Colors Demo</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .subtitle {
+            color: #666;
+            margin-bottom: 40px;
+        }
+        .color-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .color-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .color-preview {
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .color-info {
+            padding: 15px;
+            background: white;
+        }
+        .color-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        .color-value {
+            font-family: monospace;
+            color: #666;
+            font-size: 14px;
+        }
+        .demo-section {
+            margin-top: 40px;
+            padding: 30px;
+            border-radius: 8px;
+        }
+        .demo-section h2 {
+            margin-top: 0;
+        }
+        .button-demo {
+            margin-top: 20px;
+        }
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎨 Menu Color Palette</h1>
+        <p class="subtitle">Colors automatically extracted from your menu photos</p>
+        
+        <div class="color-grid">
+            <div class="color-card">
+                <div class="color-preview" style="background-color: #9ea0a3; color: #ffffff;">
+                    Primary
+                </div>
+                <div class="color-info">
+                    <div class="color-name">Primary Color</div>
+                    <div class="color-value">RGB: 158, 160, 163</div>
+                    <div class="color-value">HEX: #9ea0a3</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-preview" style="background-color: #1b191e; color: #ffffff;">
+                    Secondary
+                </div>
+                <div class="color-info">
+                    <div class="color-name">Secondary Color</div>
+                    <div class="color-value">RGB: 27, 25, 30</div>
+                    <div class="color-value">HEX: #1b191e</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-preview" style="background-color: #6a4b40; color: #ffffff;">
+                    Accent
+                </div>
+                <div class="color-info">
+                    <div class="color-name">Accent Color</div>
+                    <div class="color-value">RGB: 106, 75, 64</div>
+                    <div class="color-value">HEX: #6a4b40</div>
+                </div>
+            </div>
+            <div class="color-card">
+                <div class="color-preview" style="background-color: #d8d6d2; color: #000000;">
+                    Background
+                </div>
+                <div class="color-info">
+                    <div class="color-name">Background Color</div>
+                    <div class="color-value">RGB: 216, 214, 210</div>
+                    <div class="color-value">HEX: #d8d6d2</div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="demo-section" style="background-color: #9ea0a3; color: #ffffff;">
+            <h2>Navigation Bar Example</h2>
+            <p>This is how your navigation bar will look with the primary color (#9ea0a3)</p>
+        </div>
+        
+        <div class="demo-section" style="background-color: #1b191e; color: #ffffff;">
+            <h2>Content Section Example</h2>
+            <p>Secondary sections use the second most prominent color (#1b191e)</p>
+        </div>
+        
+        <div class="button-demo">
+            <h2>Interactive Elements</h2>
+            <button class="btn" style="background-color: #6a4b40; color: #ffffff;">
+                Accent Button
+            </button>
+            <button class="btn" style="background-color: #9ea0a3; color: #ffffff;">
+                Primary Button
+            </button>
+            <button class="btn" style="background-color: #1b191e; color: #ffffff;">
+                Secondary Button
+            </button>
+        </div>
+        
+        <div style="margin-top: 40px; padding: 20px; background: #f9f9f9; border-radius: 8px;">
+            <h3>📋 Usage</h3>
+            <p>These colors have been extracted from <strong>5</strong> menu images and applied to:</p>
+            <ul>
+                <li><code>web/index.css</code> - CSS variables and styles</li>
+                <li>Navigation bars, buttons, and interactive elements</li>
+                <li>Background colors and text colors with proper contrast</li>
+            </ul>
+            <p>The CSS uses modern CSS variables for easy customization:</p>
+            <pre style="background: white; padding: 15px; border-radius: 4px; overflow-x: auto;">
+--primary-color: #9ea0a3;
+--secondary-color: #1b191e;
+--accent-color: #6a4b40;</pre>
+        </div>
+    </div>
+</body>
+</html>
