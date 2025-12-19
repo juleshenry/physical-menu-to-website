@@ -5,6 +5,7 @@ import pytesseract
 from PIL import Image
 from smart_color import SmartColor
 from smart_menu import SmartMenu
+from css_generator import generate_css_from_images
 
 """
 `:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,:`:,
@@ -73,10 +74,16 @@ def main(*a, **k):
     ips = premain("examples/sabor-catracha")
     sm = SmartMenu(ips)
     sm.get_html_body()
-    sc = SmartColor(ips, colors=32)
-    sc.global_colors()
-    print(*sc.g_c, sep="\n>>>")
+    sc = SmartColor(ips, colors=4)
+    colors = sc.global_colors()
+    print(*colors, sep="\n>>>")
+    
+    # Generate CSS from extracted colors
+    css_output_path = os.path.join(os.path.dirname(__file__), "../web/index.css")
+    generate_css_from_images(ips, num_colors=4, output_path=css_output_path)
+    print(f"\nGenerated CSS with colors from menu images at: {css_output_path}")
 
 
 if __name__ == "__main__":
     print("hey")
+    main()
