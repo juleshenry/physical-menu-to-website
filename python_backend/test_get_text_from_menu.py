@@ -5,6 +5,7 @@ This script tests the OCR functionality on example menu images.
 """
 import os
 import sys
+import traceback
 from smart_menu import SmartMenu, identify_pure
 from PIL import Image
 
@@ -68,7 +69,6 @@ def test_smart_menu_sabor_catracha():
         return True
     except Exception as e:
         print(f"Error: {e}")
-        import traceback
         traceback.print_exc()
         return False
 
@@ -110,7 +110,6 @@ def test_smart_menu_happypocha():
         return True
     except Exception as e:
         print(f"Error: {e}")
-        import traceback
         traceback.print_exc()
         return False
 
@@ -149,7 +148,6 @@ def test_associate_prices_to_text():
         return True
     except Exception as e:
         print(f"Error: {e}")
-        import traceback
         traceback.print_exc()
         return False
 
@@ -160,28 +158,35 @@ def main():
     print("Testing Text Extraction from Menu Images")
     print("=" * 60)
     
-    os.chdir(os.path.dirname(os.path.abspath(__file__)))
+    # Change to the script's directory to ensure relative paths work correctly
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    original_dir = os.getcwd()
+    os.chdir(script_dir)
     
-    results = {
-        "identify_pure": test_identify_pure(),
-        "smart_menu_sabor_catracha": test_smart_menu_sabor_catracha(),
-        "smart_menu_happypocha": test_smart_menu_happypocha(),
-        "associate_prices_to_text": test_associate_prices_to_text(),
-    }
-    
-    # Summary
-    print("\n" + "=" * 60)
-    print("Test Summary")
-    print("=" * 60)
-    for test_name, passed in results.items():
-        status = "✓ PASSED" if passed else "✗ FAILED"
-        print(f"{test_name}: {status}")
-    
-    total_tests = len(results)
-    passed_tests = sum(results.values())
-    print(f"\nTotal: {passed_tests}/{total_tests} tests passed")
-    
-    return 0 if all(results.values()) else 1
+    try:
+        results = {
+            "identify_pure": test_identify_pure(),
+            "smart_menu_sabor_catracha": test_smart_menu_sabor_catracha(),
+            "smart_menu_happypocha": test_smart_menu_happypocha(),
+            "associate_prices_to_text": test_associate_prices_to_text(),
+        }
+        
+        # Summary
+        print("\n" + "=" * 60)
+        print("Test Summary")
+        print("=" * 60)
+        for test_name, passed in results.items():
+            status = "✓ PASSED" if passed else "✗ FAILED"
+            print(f"{test_name}: {status}")
+        
+        total_tests = len(results)
+        passed_tests = sum(results.values())
+        print(f"\nTotal: {passed_tests}/{total_tests} tests passed")
+        
+        return 0 if all(results.values()) else 1
+    finally:
+        # Restore the original working directory
+        os.chdir(original_dir)
 
 
 if __name__ == "__main__":
