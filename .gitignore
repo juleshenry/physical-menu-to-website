@@ -50,3 +50,9 @@ m4/lt~obsolete.m4
 # can automatically generate from config.status script
 # (which is called by configure script))
 Makefile
+
+# Python cache and test artifacts
+*.pyc
+__pycache__/
+*.kash
+.pytest_cache/
