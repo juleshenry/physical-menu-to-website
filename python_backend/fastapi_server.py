@@ -59,14 +59,14 @@ async def process_images(request: ImagePathsRequest):
     Returns:
         Dictionary with extracted text content from images
     """
+    image_paths = request.image_paths
+    
+    # Validate that all image paths exist
+    for path in image_paths:
+        if not os.path.exists(path):
+            raise HTTPException(status_code=404, detail=f"Image not found: {path}")
+    
     try:
-        image_paths = request.image_paths
-        
-        # Validate that all image paths exist
-        for path in image_paths:
-            if not os.path.exists(path):
-                raise HTTPException(status_code=404, detail=f"Image not found: {path}")
-        
         # Process images using SmartMenu
         sm = SmartMenu(image_paths)
         result = sm.get_html_body()
@@ -90,14 +90,14 @@ async def extract_colors(request: ImagePathsRequest):
     Returns:
         Dictionary with extracted colors from images
     """
+    image_paths = request.image_paths
+    
+    # Validate that all image paths exist
+    for path in image_paths:
+        if not os.path.exists(path):
+            raise HTTPException(status_code=404, detail=f"Image not found: {path}")
+    
     try:
-        image_paths = request.image_paths
-        
-        # Validate that all image paths exist
-        for path in image_paths:
-            if not os.path.exists(path):
-                raise HTTPException(status_code=404, detail=f"Image not found: {path}")
-        
         # Extract colors using SmartColor
         sc = SmartColor(image_paths, colors=4)
         colors = sc.global_colors()
