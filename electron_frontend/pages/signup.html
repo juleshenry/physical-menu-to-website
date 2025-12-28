@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up - Menu2Website</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar-brand">Menu2Website</div>
+    <nav>
+      <ul class="navbar-menu">
+        <li><a href="welcome.html">Home</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container">
+    <div style="max-width: 600px; margin: 4rem auto;">
+      <h1 class="text-center mb-4">Sign Up</h1>
+      <p class="text-center mb-4" style="color: #7f8c8d;">TODO: Authentication will be implemented later</p>
+      
+      <form id="signup-form" style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <div class="form-group">
+          <label class="form-label" for="name">Full Name</label>
+          <input type="text" id="name" class="form-input" placeholder="Enter your name">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="email">Email Address</label>
+          <input type="email" id="email" class="form-input" placeholder="Enter your email">
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label" for="password">Password</label>
+          <input type="password" id="password" class="form-input" placeholder="Enter your password">
+        </div>
+        
+        <button type="submit" class="btn btn-primary" style="width: 100%;">Continue to Upload</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    document.getElementById('signup-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      // TODO: Implement authentication
+      // For now, just navigate to upload page
+      window.location.href = 'upload.html';
+    });
+  </script>
+</body>
+</html>

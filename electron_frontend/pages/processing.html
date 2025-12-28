@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Processing - Menu2Website</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar-brand">Menu2Website</div>
+    <nav>
+      <ul class="navbar-menu">
+        <li><a href="welcome.html">Home</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container">
+    <div id="loading-section" class="loading-container">
+      <div class="loading"></div>
+      <p class="loading-text">Processing your menu images...</p>
+      <p style="color: #7f8c8d; margin-top: 0.5rem;">This may take a moment</p>
+    </div>
+    
+    <div id="results-section" class="hidden">
+      <h1 class="text-center mt-4 mb-2">Extracted Color Scheme</h1>
+      <p class="text-center mb-4" style="color: #7f8c8d;">These colors were extracted from your menu photos</p>
+      
+      <div id="color-scheme" class="color-scheme"></div>
+      
+      <h2 class="text-center mt-4 mb-2">Menu Items and Prices</h2>
+      <div id="menu-results"></div>
+      
+      <div class="text-center mt-4">
+        <button class="btn btn-primary" onclick="window.location.href='results.html'">View Full Results</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/demo-data.js"></script>
+  <script>
+    // Get uploaded files from session storage
+    const filePaths = JSON.parse(sessionStorage.getItem('uploadedFiles') || '[]');
+    
+    if (filePaths.length === 0) {
+      alert('No files found. Please upload images first.');
+      window.location.href = 'upload.html';
+    }
+    
+    async function processImages() {
+      try {
+        // Check if electronAPI is available (running in Electron)
+        if (window.electronAPI) {
+          // First, extract colors
+          const colorResult = await window.electronAPI.extractColors(filePaths);
+          console.log('Color extraction result:', colorResult);
+          
+          // Display colors
+          displayColors(colorResult);
+          
+          // Then, process menu text and prices
+          const menuResult = await window.electronAPI.processImages(filePaths);
+          console.log('Menu processing result:', menuResult);
+          
+          // Store results for later pages
+          sessionStorage.setItem('colorScheme', JSON.stringify(colorResult));
+          sessionStorage.setItem('menuData', JSON.stringify(menuResult));
+          
+          // Display menu results
+          displayMenuResults(menuResult);
+          
+          // Hide loading, show results
+          document.getElementById('loading-section').classList.add('hidden');
+          document.getElementById('results-section').classList.remove('hidden');
+        } else {
+          // Fallback to demo mode if not in Electron
+          throw new Error('Electron API not available');
+        }
+        
+      } catch (error) {
+        console.error('Processing error:', error);
+        document.getElementById('loading-section').innerHTML = `
+          <div style="text-align: center;">
+            <h2 style="color: #e74c3c;">⚠️ Processing Error</h2>
+            <p style="margin-top: 1rem;">${error.message}</p>
+            <p style="color: #7f8c8d; margin-top: 1rem;">This is a preview mode. Backend integration is in progress.</p>
+            <button class="btn btn-primary mt-3" onclick="showDemoResults()">View Demo Results</button>
+            <button class="btn btn-secondary mt-3" onclick="window.location.href='upload.html'">Back to Upload</button>
+          </div>
+        `;
+      }
+    }
+    
+    function displayColors(colorData) {
+      const colorScheme = document.getElementById('color-scheme');
+      
+      // Use shared demo colors if extraction fails
+      const colors = colorData.colors || window.DEMO_DATA.colors;
+      
+      colorScheme.innerHTML = colors.map((color, index) => {
+        const bgColor = color.hex || `rgb(${color.rgb.join(',')})`;
+        const textColor = (color.rgb[0] + color.rgb[1] + color.rgb[2]) / 3 > 128 ? '#000' : '#fff';
+        
+        return `
+          <div class="color-card">
+            <div class="color-preview" style="background-color: ${bgColor}; color: ${textColor};">
+              ${color.name || `Color ${index + 1}`}
+            </div>
+            <div class="color-info">
+              <div class="color-name">${color.name || `Color ${index + 1}`}</div>
+              <div class="color-value">RGB: ${color.rgb.join(', ')}</div>
+              <div class="color-value">HEX: ${color.hex || bgColor}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+    
+    function displayMenuResults(menuData) {
+      const menuResults = document.getElementById('menu-results');
+      
+      if (menuData.body) {
+        let html = '<div class="menu-page">';
+        
+        for (const [filename, content] of Object.entries(menuData.body)) {
+          html += `
+            <h3 style="margin-bottom: 1rem; color: var(--primary-color);">📄 ${filename}</h3>
+            <pre style="background: #f5f5f5; padding: 1rem; border-radius: 8px; overflow-x: auto;">${content}</pre>
+          `;
+        }
+        
+        html += '</div>';
+        menuResults.innerHTML = html;
+      } else {
+        menuResults.innerHTML = '<p class="text-center" style="color: #7f8c8d;">Processing menu text...</p>';
+      }
+    }
+    
+    function showDemoResults() {
+      const demoColors = [
+        { name: 'Primary', rgb: [52, 152, 219], hex: '#3498db' },
+        { name: 'Secondary', rgb: [44, 62, 80], hex: '#2c3e50' },
+        { name: 'Accent', rgb: [231, 76, 60], hex: '#e74c3c' },
+        { name: 'Background', rgb: [236, 240, 241], hex: '#ecf0f1' }
+      ];
+      
+      displayColors({ colors: window.DEMO_DATA.colors });
+      
+      const demoMenu = {
+        body: {}
+      };
+      
+      // Convert menu pages to body format
+      window.DEMO_DATA.menuPages.forEach((page, index) => {
+        demoMenu.body[`${page.filename}.jpg`] = page.content;
+      });
+      
+      displayMenuResults(demoMenu);
+      
+      sessionStorage.setItem('colorScheme', JSON.stringify({ colors: window.DEMO_DATA.colors }));
+      sessionStorage.setItem('menuData', JSON.stringify(demoMenu));
+      
+      document.getElementById('loading-section').classList.add('hidden');
+      document.getElementById('results-section').classList.remove('hidden');
+    }
+    
+    // Start processing
+    processImages();
+  </script>
+</body>
+</html>
