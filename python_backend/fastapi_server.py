@@ -19,7 +19,7 @@ try:
     from pydantic import BaseModel
     import uvicorn
 except ImportError:
-    print("Error: FastAPI and uvicorn are required. Install with: pip install fastapi uvicorn", file=sys.stderr)
+    print("Error: FastAPI, uvicorn, and pydantic are required. Install with: pip install fastapi uvicorn pydantic", file=sys.stderr)
     sys.exit(1)
 
 from smart_menu import SmartMenu
@@ -28,9 +28,11 @@ from smart_color import SmartColor
 app = FastAPI(title="Menu Processor API", version="1.0.0")
 
 # Enable CORS for Electron app
+# Note: In production, consider restricting allow_origins to specific origins
+# for better security. Currently set to "*" for development convenience.
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["*"],  # Consider restricting in production
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

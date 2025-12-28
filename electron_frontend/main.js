@@ -5,6 +5,7 @@ const { spawn } = require('child_process');
 let mainWindow;
 let pythonProcess = null;
 const BACKEND_PORT = 8000;
+const BACKEND_HOST = '127.0.0.1';
 
 function startPythonBackend() {
   // In development, use the python command. 
@@ -83,7 +84,7 @@ app.on('will-quit', () => {
 // IPC handlers for backend communication via FastAPI
 ipcMain.handle('process-images', async (event, imagePaths) => {
   try {
-    const response = await fetch(`http://127.0.0.1:${BACKEND_PORT}/process-images`, {
+    const response = await fetch(`http://${BACKEND_HOST}:${BACKEND_PORT}/process-images`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -105,7 +106,7 @@ ipcMain.handle('process-images', async (event, imagePaths) => {
 
 ipcMain.handle('extract-colors', async (event, imagePaths) => {
   try {
-    const response = await fetch(`http://127.0.0.1:${BACKEND_PORT}/extract-colors`, {
+    const response = await fetch(`http://${BACKEND_HOST}:${BACKEND_PORT}/extract-colors`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
