@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Upload Menu Photos - Menu2Website</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar-brand">Menu2Website</div>
+    <nav>
+      <ul class="navbar-menu">
+        <li><a href="welcome.html">Home</a></li>
+        <li><a href="signup.html">Sign Up</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container">
+    <h1 class="text-center mt-4 mb-2">Upload Your Menu Photos</h1>
+    <p class="text-center mb-4" style="color: #7f8c8d;">Upload up to 16 photos of your menu</p>
+    
+    <div class="upload-area" id="upload-area">
+      <div class="upload-icon">📸</div>
+      <h3>Click to upload or drag and drop</h3>
+      <p style="color: #7f8c8d; margin-top: 0.5rem;">PNG, JPG or JPEG (Max 16 files)</p>
+      <input type="file" id="file-input" multiple accept="image/*" style="display: none;">
+    </div>
+    
+    <div id="preview-container" class="preview-grid hidden"></div>
+    
+    <div id="file-count" class="text-center mt-3" style="color: #7f8c8d;"></div>
+    
+    <div class="text-center mt-4">
+      <button id="process-btn" class="btn btn-primary" style="display: none;">Process Images</button>
+    </div>
+  </div>
+
+  <script>
+    const { ipcRenderer } = require('electron');
+    const uploadArea = document.getElementById('upload-area');
+    const fileInput = document.getElementById('file-input');
+    const previewContainer = document.getElementById('preview-container');
+    const fileCount = document.getElementById('file-count');
+    const processBtn = document.getElementById('process-btn');
+    
+    let selectedFiles = [];
+    const MAX_FILES = 16;
+    
+    // Click to upload
+    uploadArea.addEventListener('click', () => {
+      fileInput.click();
+    });
+    
+    // File selection handler
+    fileInput.addEventListener('change', (e) => {
+      handleFiles(Array.from(e.target.files));
+    });
+    
+    // Drag and drop handlers
+    uploadArea.addEventListener('dragover', (e) => {
+      e.preventDefault();
+      uploadArea.classList.add('dragover');
+    });
+    
+    uploadArea.addEventListener('dragleave', () => {
+      uploadArea.classList.remove('dragover');
+    });
+    
+    uploadArea.addEventListener('drop', (e) => {
+      e.preventDefault();
+      uploadArea.classList.remove('dragover');
+      handleFiles(Array.from(e.dataTransfer.files));
+    });
+    
+    function handleFiles(files) {
+      // Filter image files only
+      const imageFiles = files.filter(file => file.type.startsWith('image/'));
+      
+      // Check if adding these files would exceed the limit
+      if (selectedFiles.length + imageFiles.length > MAX_FILES) {
+        alert(`You can only upload up to ${MAX_FILES} files. Currently: ${selectedFiles.length}`);
+        return;
+      }
+      
+      selectedFiles.push(...imageFiles);
+      updatePreview();
+    }
+    
+    function updatePreview() {
+      previewContainer.innerHTML = '';
+      
+      if (selectedFiles.length > 0) {
+        previewContainer.classList.remove('hidden');
+        processBtn.style.display = 'inline-block';
+        
+        selectedFiles.forEach((file, index) => {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const previewItem = document.createElement('div');
+            previewItem.className = 'preview-item';
+            previewItem.innerHTML = `
+              <img src="${e.target.result}" alt="Preview ${index + 1}">
+              <button class="preview-remove" onclick="removeFile(${index})">×</button>
+            `;
+            previewContainer.appendChild(previewItem);
+          };
+          reader.readAsDataURL(file);
+        });
+        
+        fileCount.textContent = `${selectedFiles.length} / ${MAX_FILES} files selected`;
+      } else {
+        previewContainer.classList.add('hidden');
+        processBtn.style.display = 'none';
+        fileCount.textContent = '';
+      }
+    }
+    
+    window.removeFile = function(index) {
+      selectedFiles.splice(index, 1);
+      updatePreview();
+    };
+    
+    processBtn.addEventListener('click', async () => {
+      if (selectedFiles.length === 0) {
+        alert('Please select at least one image');
+        return;
+      }
+      
+      // Show loading
+      processBtn.textContent = 'Processing...';
+      processBtn.disabled = true;
+      
+      try {
+        // Get file paths
+        const filePaths = selectedFiles.map(file => file.path);
+        
+        // Store files for later use
+        sessionStorage.setItem('uploadedFiles', JSON.stringify(filePaths));
+        
+        // Navigate to processing page
+        window.location.href = 'processing.html';
+      } catch (error) {
+        alert('Error processing images: ' + error.message);
+        processBtn.textContent = 'Process Images';
+        processBtn.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>

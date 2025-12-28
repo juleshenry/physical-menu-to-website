@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Results - Menu2Website</title>
+  <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+  <div class="navbar">
+    <div class="navbar-brand">Menu2Website</div>
+    <nav>
+      <ul class="navbar-menu">
+        <li><a href="welcome.html">Home</a></li>
+        <li><a href="#" onclick="showPage('colors')">Colors</a></li>
+        <li><a href="#" onclick="showPage('menu')">Menu</a></li>
+        <li><a href="#" onclick="showPage('email')">Email</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="container">
+    <!-- Color Scheme Page -->
+    <div id="colors-page" class="page-content">
+      <h1 class="text-center mt-4 mb-2">Your Color Scheme</h1>
+      <p class="text-center mb-4" style="color: #7f8c8d;">Colors extracted from your menu</p>
+      <div id="color-display" class="color-scheme"></div>
+      
+      <div class="text-center mt-4">
+        <button class="btn btn-primary" onclick="showPage('menu')">View Menu →</button>
+      </div>
+    </div>
+
+    <!-- Menu Pages with Navigation -->
+    <div id="menu-page" class="page-content hidden">
+      <h1 class="text-center mt-4 mb-2">Menu Items & Prices</h1>
+      <p class="text-center mb-4" style="color: #7f8c8d;">Navigate through your menu pages</p>
+      
+      <div id="menu-content" class="menu-page"></div>
+      
+      <div class="page-navigation">
+        <button class="nav-arrow" id="prev-btn" onclick="navigatePage(-1)">←</button>
+        <span class="page-indicator" id="page-indicator">Page 1 of 1</span>
+        <button class="nav-arrow" id="next-btn" onclick="navigatePage(1)">→</button>
+      </div>
+      
+      <div class="text-center mt-4">
+        <button class="btn btn-primary" onclick="showPage('email')">Send Results via Email →</button>
+      </div>
+    </div>
+
+    <!-- Email Page -->
+    <div id="email-page" class="page-content hidden">
+      <h1 class="text-center mt-4 mb-2">Email Your Results</h1>
+      <p class="text-center mb-4" style="color: #7f8c8d;">Get your menu and color scheme sent to your email</p>
+      
+      <div style="max-width: 600px; margin: 2rem auto; background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
+        <form id="email-form">
+          <div class="form-group">
+            <label class="form-label" for="recipient-email">Email Address</label>
+            <input type="email" id="recipient-email" class="form-input" placeholder="your@email.com" required>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">
+              <input type="checkbox" checked> Include Color Scheme
+            </label>
+          </div>
+          
+          <div class="form-group">
+            <label class="form-label">
+              <input type="checkbox" checked> Include Menu Items
+            </label>
+          </div>
+          
+          <button type="submit" class="btn btn-primary" style="width: 100%;">Send Email</button>
+        </form>
+        
+        <div id="email-status" class="hidden mt-3 text-center"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    let menuPages = [];
+    let currentPageIndex = 0;
+    
+    // Load data from session storage
+    const colorData = JSON.parse(sessionStorage.getItem('colorScheme') || '{}');
+    const menuData = JSON.parse(sessionStorage.getItem('menuData') || '{}');
+    
+    // Initialize the page
+    function init() {
+      displayColors();
+      prepareMenuPages();
+      showPage('colors');
+    }
+    
+    function displayColors() {
+      const colorDisplay = document.getElementById('color-display');
+      
+      const demoColors = [
+        { name: 'Primary', rgb: [52, 152, 219], hex: '#3498db' },
+        { name: 'Secondary', rgb: [44, 62, 80], hex: '#2c3e50' },
+        { name: 'Accent', rgb: [231, 76, 60], hex: '#e74c3c' },
+        { name: 'Background', rgb: [236, 240, 241], hex: '#ecf0f1' }
+      ];
+      
+      const colors = colorData.colors || demoColors;
+      
+      colorDisplay.innerHTML = colors.map((color, index) => {
+        const bgColor = color.hex || `rgb(${color.rgb.join(',')})`;
+        const textColor = (color.rgb[0] + color.rgb[1] + color.rgb[2]) / 3 > 128 ? '#000' : '#fff';
+        
+        return `
+          <div class="color-card">
+            <div class="color-preview" style="background-color: ${bgColor}; color: ${textColor};">
+              ${color.name || `Color ${index + 1}`}
+            </div>
+            <div class="color-info">
+              <div class="color-name">${color.name || `Color ${index + 1}`}</div>
+              <div class="color-value">RGB: ${color.rgb.join(', ')}</div>
+              <div class="color-value">HEX: ${color.hex || bgColor}</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+    
+    function prepareMenuPages() {
+      if (menuData.body) {
+        menuPages = Object.entries(menuData.body).map(([filename, content]) => ({
+          filename,
+          content
+        }));
+      } else {
+        // Demo data
+        menuPages = [
+          { filename: 'Page 1', content: '🍕 Margherita Pizza - $15.99\n🥗 Caesar Salad - $12.99\n🍝 Spaghetti Carbonara - $16.99' },
+          { filename: 'Page 2', content: '🍰 Chocolate Cake - $8.99\n🍮 Tiramisu - $9.99\n🍦 Ice Cream Sundae - $6.99' },
+          { filename: 'Page 3', content: '☕ Espresso - $3.99\n🍵 Green Tea - $2.99\n🥤 Fresh Juice - $5.99' }
+        ];
+      }
+      
+      displayMenuPage();
+    }
+    
+    function displayMenuPage() {
+      const menuContent = document.getElementById('menu-content');
+      const pageIndicator = document.getElementById('page-indicator');
+      const prevBtn = document.getElementById('prev-btn');
+      const nextBtn = document.getElementById('next-btn');
+      
+      if (menuPages.length === 0) {
+        menuContent.innerHTML = '<p class="text-center" style="color: #7f8c8d;">No menu data available</p>';
+        return;
+      }
+      
+      const page = menuPages[currentPageIndex];
+      
+      // Parse content into menu items
+      const lines = page.content.split('\n').filter(line => line.trim());
+      let itemsHtml = '';
+      
+      lines.forEach(line => {
+        // Try to extract price from line
+        const priceMatch = line.match(/\$?(\d+\.?\d*)/);
+        if (priceMatch) {
+          const price = priceMatch[1];
+          const itemName = line.replace(/\$?\d+\.?\d*/, '').trim();
+          itemsHtml += `
+            <div class="menu-item">
+              <span class="menu-item-name">${itemName}</span>
+              <span class="menu-item-price">$${price}</span>
+            </div>
+          `;
+        } else {
+          itemsHtml += `
+            <div class="menu-item">
+              <span class="menu-item-name">${line}</span>
+            </div>
+          `;
+        }
+      });
+      
+      menuContent.innerHTML = `
+        <h3 style="margin-bottom: 1rem; color: var(--primary-color);">📄 ${page.filename}</h3>
+        ${itemsHtml}
+      `;
+      
+      // Update navigation
+      pageIndicator.textContent = `Page ${currentPageIndex + 1} of ${menuPages.length}`;
+      prevBtn.disabled = currentPageIndex === 0;
+      nextBtn.disabled = currentPageIndex === menuPages.length - 1;
+    }
+    
+    function navigatePage(direction) {
+      currentPageIndex += direction;
+      currentPageIndex = Math.max(0, Math.min(menuPages.length - 1, currentPageIndex));
+      displayMenuPage();
+    }
+    
+    function showPage(pageName) {
+      // Hide all pages
+      document.querySelectorAll('.page-content').forEach(page => {
+        page.classList.add('hidden');
+      });
+      
+      // Show selected page
+      document.getElementById(`${pageName}-page`).classList.remove('hidden');
+    }
+    
+    // Email form handler
+    document.getElementById('email-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      const email = document.getElementById('recipient-email').value;
+      const statusDiv = document.getElementById('email-status');
+      
+      statusDiv.classList.remove('hidden');
+      statusDiv.innerHTML = '<div class="loading"></div><p class="loading-text">Sending email...</p>';
+      
+      // TODO: Implement actual email sending
+      setTimeout(() => {
+        statusDiv.innerHTML = `
+          <div style="color: #27ae60; font-weight: bold;">✓ Email sent successfully!</div>
+          <p style="color: #7f8c8d; margin-top: 0.5rem;">Results sent to ${email}</p>
+        `;
+      }, 2000);
+    });
+    
+    // Initialize on load
+    init();
+  </script>
+</body>
+</html>

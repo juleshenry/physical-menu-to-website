@@ -1,0 +1,16 @@
+{
+  "name": "menu2website-electron",
+  "version": "1.0.0",
+  "description": "Electron app for converting physical menus to websites",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["electron", "menu", "converter"],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "electron": "^39.2.7"
+  }
+}
