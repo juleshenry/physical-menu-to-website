@@ -81,6 +81,7 @@
     </div>
   </div>
 
+  <script src="../js/demo-data.js"></script>
   <script>
     let menuPages = [];
     let currentPageIndex = 0;
@@ -99,14 +100,7 @@
     function displayColors() {
       const colorDisplay = document.getElementById('color-display');
       
-      const demoColors = [
-        { name: 'Primary', rgb: [52, 152, 219], hex: '#3498db' },
-        { name: 'Secondary', rgb: [44, 62, 80], hex: '#2c3e50' },
-        { name: 'Accent', rgb: [231, 76, 60], hex: '#e74c3c' },
-        { name: 'Background', rgb: [236, 240, 241], hex: '#ecf0f1' }
-      ];
-      
-      const colors = colorData.colors || demoColors;
+      const colors = colorData.colors || window.DEMO_DATA.colors;
       
       colorDisplay.innerHTML = colors.map((color, index) => {
         const bgColor = color.hex || `rgb(${color.rgb.join(',')})`;
@@ -134,12 +128,8 @@
           content
         }));
       } else {
-        // Demo data
-        menuPages = [
-          { filename: 'Page 1', content: '🍕 Margherita Pizza - $15.99\n🥗 Caesar Salad - $12.99\n🍝 Spaghetti Carbonara - $16.99' },
-          { filename: 'Page 2', content: '🍰 Chocolate Cake - $8.99\n🍮 Tiramisu - $9.99\n🍦 Ice Cream Sundae - $6.99' },
-          { filename: 'Page 3', content: '☕ Espresso - $3.99\n🍵 Green Tea - $2.99\n🥤 Fresh Juice - $5.99' }
-        ];
+        // Use shared demo data
+        menuPages = window.DEMO_DATA.menuPages;
       }
       
       displayMenuPage();

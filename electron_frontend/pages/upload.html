@@ -133,8 +133,9 @@
       processBtn.disabled = true;
       
       try {
-        // Get file paths
-        const filePaths = selectedFiles.map(file => file.path);
+        // Get file paths - in Electron, file.path is available
+        // For web browser fallback, we store file names
+        const filePaths = selectedFiles.map(file => file.path || file.name);
         
         // Store files for later use
         sessionStorage.setItem('uploadedFiles', JSON.stringify(filePaths));

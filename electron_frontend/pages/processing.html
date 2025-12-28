@@ -38,9 +38,8 @@
     </div>
   </div>
 
+  <script src="../js/demo-data.js"></script>
   <script>
-    const { ipcRenderer } = require('electron');
-    
     // Get uploaded files from session storage
     const filePaths = JSON.parse(sessionStorage.getItem('uploadedFiles') || '[]');
     
@@ -51,27 +50,33 @@
     
     async function processImages() {
       try {
-        // First, extract colors
-        const colorResult = await ipcRenderer.invoke('extract-colors', filePaths);
-        console.log('Color extraction result:', colorResult);
-        
-        // Display colors
-        displayColors(colorResult);
-        
-        // Then, process menu text and prices
-        const menuResult = await ipcRenderer.invoke('process-images', filePaths);
-        console.log('Menu processing result:', menuResult);
-        
-        // Store results for later pages
-        sessionStorage.setItem('colorScheme', JSON.stringify(colorResult));
-        sessionStorage.setItem('menuData', JSON.stringify(menuResult));
-        
-        // Display menu results
-        displayMenuResults(menuResult);
-        
-        // Hide loading, show results
-        document.getElementById('loading-section').classList.add('hidden');
-        document.getElementById('results-section').classList.remove('hidden');
+        // Check if electronAPI is available (running in Electron)
+        if (window.electronAPI) {
+          // First, extract colors
+          const colorResult = await window.electronAPI.extractColors(filePaths);
+          console.log('Color extraction result:', colorResult);
+          
+          // Display colors
+          displayColors(colorResult);
+          
+          // Then, process menu text and prices
+          const menuResult = await window.electronAPI.processImages(filePaths);
+          console.log('Menu processing result:', menuResult);
+          
+          // Store results for later pages
+          sessionStorage.setItem('colorScheme', JSON.stringify(colorResult));
+          sessionStorage.setItem('menuData', JSON.stringify(menuResult));
+          
+          // Display menu results
+          displayMenuResults(menuResult);
+          
+          // Hide loading, show results
+          document.getElementById('loading-section').classList.add('hidden');
+          document.getElementById('results-section').classList.remove('hidden');
+        } else {
+          // Fallback to demo mode if not in Electron
+          throw new Error('Electron API not available');
+        }
         
       } catch (error) {
         console.error('Processing error:', error);
@@ -90,15 +95,8 @@
     function displayColors(colorData) {
       const colorScheme = document.getElementById('color-scheme');
       
-      // Default demo colors if extraction fails
-      const demoColors = [
-        { name: 'Primary', rgb: [158, 160, 163], hex: '#9ea0a3' },
-        { name: 'Secondary', rgb: [27, 25, 30], hex: '#1b191e' },
-        { name: 'Accent', rgb: [106, 75, 64], hex: '#6a4b40' },
-        { name: 'Background', rgb: [216, 214, 210], hex: '#d8d6d2' }
-      ];
-      
-      const colors = colorData.colors || demoColors;
+      // Use shared demo colors if extraction fails
+      const colors = colorData.colors || window.DEMO_DATA.colors;
       
       colorScheme.innerHTML = colors.map((color, index) => {
         const bgColor = color.hex || `rgb(${color.rgb.join(',')})`;
@@ -147,18 +145,20 @@
         { name: 'Background', rgb: [236, 240, 241], hex: '#ecf0f1' }
       ];
       
-      displayColors({ colors: demoColors });
+      displayColors({ colors: window.DEMO_DATA.colors });
       
       const demoMenu = {
-        body: {
-          'menu_page_1.jpg': 'Caesar Salad - $12.99\nMargherita Pizza - $15.99\nGrilled Chicken - $18.99',
-          'menu_page_2.jpg': 'Chocolate Cake - $8.99\nTiramisu - $9.99\nIce Cream - $6.99'
-        }
+        body: {}
       };
+      
+      // Convert menu pages to body format
+      window.DEMO_DATA.menuPages.forEach((page, index) => {
+        demoMenu.body[`${page.filename}.jpg`] = page.content;
+      });
       
       displayMenuResults(demoMenu);
       
-      sessionStorage.setItem('colorScheme', JSON.stringify({ colors: demoColors }));
+      sessionStorage.setItem('colorScheme', JSON.stringify({ colors: window.DEMO_DATA.colors }));
       sessionStorage.setItem('menuData', JSON.stringify(demoMenu));
       
       document.getElementById('loading-section').classList.add('hidden');
