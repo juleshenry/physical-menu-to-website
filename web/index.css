@@ -1,17 +1,66 @@
+/* Auto-generated CSS from menu image colors */
+
+:root {
+    --primary-color: #9fa1a3;
+    --secondary-color: #1c181e;
+    --accent-color: #6a4c42;
+    --background-color: #d7d6d2;
+    --primary-text: #ffffff;
+    --secondary-text: #ffffff;
+}
+
 .preFade {
     opacity: 0;
-    transition-property: opacity
+    transition-property: opacity;
 }
 
 .fadeIn:not([data-override-initial-global-animation]) {
-    opacity: 1 !important
+    opacity: 1 !important;
+}
+
+/* Navigation bar styling with primary color */
+.bg-gray-800 {
+    background-color: var(--primary-color) !important;
+    color: var(--primary-text);
+}
+
+/* Secondary elements */
+.bg-gray-700 {
+    background-color: var(--secondary-color) !important;
+    color: var(--secondary-text);
+}
+
+/* Link hover effects with accent color */
+a:hover {
+    color: var(--accent-color) !important;
+}
+
+/* Text color overrides */
+.text-white {
+    color: var(--primary-text);
+}
+
+.text-gray-300 {
+    color: var(--primary-text);
+    opacity: 0.8;
+}
+
+/* Button and interactive elements */
+button {
+    background-color: var(--accent-color);
+}
+
+button:hover {
+    background-color: var(--secondary-color);
 }
 
 @media (max-width: 640px) {
     .navbar-menu {
         display: none;
+        background-color: var(--primary-color);
     }
     .navbar-menu.active {
         display: block;
+        background-color: var(--primary-color);
     }
 }
